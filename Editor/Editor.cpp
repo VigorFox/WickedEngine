@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "wiRenderer.h"
-#include "wiScene_BindLua.h"
+#include "Scripting/LuaBindings/wiScene_BindLua.h"
 
 #include "ModelImporter.h"
 #include "Translator.h"

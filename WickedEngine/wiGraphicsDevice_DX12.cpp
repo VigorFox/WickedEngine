@@ -3354,6 +3354,9 @@ std::mutex queue_locker;
 				&internal_state->allocation
 			));
 
+			//if (SUCCEEDED(hr) &&
+			//	internal_state->allocation->GetHeap() != nullptr &&
+			//	(allocationDesc.ExtraHeapFlags == D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS || allocationDesc.ExtraHeapFlags == D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES))
 			if (allocationDesc.ExtraHeapFlags == D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS || allocationDesc.ExtraHeapFlags == D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES)
 			{
 				hr = dx12_check(device->CreatePlacedResource(
@@ -3941,6 +3944,11 @@ std::mutex queue_locker;
 			}
 		}
 
+		//if (FAILED(hr))
+		//{
+		//	return false;
+		//}
+
 		if (stage == ShaderStage::CS || stage == ShaderStage::LIB)
 		{
 			assert(internal_state->rootSignature != nullptr);
@@ -3963,6 +3971,11 @@ std::mutex queue_locker;
 			streamDesc.pPipelineStateSubobjectStream = &stream;
 			streamDesc.SizeInBytes = sizeof(stream);
 
+			//{
+			//	static std::mutex pso_creation_mutex;
+			//	std::scoped_lock lock(pso_creation_mutex);
+			//	hr = dx12_check(device->CreatePipelineState(&streamDesc, PPV_ARGS(internal_state->resource)));
+			//}
 			hr = dx12_check(device->CreatePipelineState(&streamDesc, PPV_ARGS(internal_state->resource)));
 		}
 

@@ -5,7 +5,7 @@
 #include "wiTimer.h"
 #include "wiInput.h"
 #include "wiBacklog.h"
-#include "wiApplication_BindLua.h"
+#include "Scripting/LuaBindings/wiApplication_BindLua.h"
 #include "wiVersion.h"
 #include "wiEnums.h"
 #include "wiTextureHelper.h"

@@ -334,6 +334,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiTrailRenderer_BindLua.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiVideo_BindLua.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiVoxelGrid_BindLua.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLua.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLua_Globals.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLuna.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility\dds.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility\dxva.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utility\h264.h" />
@@ -440,9 +443,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)wiJobSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiNetwork.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiPhysics.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)wiLua.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)wiLua_Globals.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)wiLuna.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiOcean.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiPlatform.h" />
@@ -466,6 +466,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)wiVideo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiVoxelGrid.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)wiXInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiC_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiMath_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiApplication_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiRenderer_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiInput_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiBacklog_API.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Jolt\AABBTree\AABBTreeBuilder.cpp" />
@@ -625,6 +631,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiTrailRenderer_BindLua.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiVideo_BindLua.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiVoxelGrid_BindLua.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\wiLua.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility\lodepng.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility\meshoptimizer\allocator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Utility\meshoptimizer\clusterizer.cpp" />
@@ -800,7 +807,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)wiPrimitive.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiJobSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiNetwork_Windows.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)wiLua.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiOcean.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiProfiler.cpp" />
@@ -819,6 +825,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)wiVideo.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiVoxelGrid.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)wiXInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiMath_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiApplication_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiRenderer_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiInput_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiBacklog_API.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)ArchiveVersionHistory.txt">

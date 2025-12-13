@@ -58,6 +58,9 @@
     <Filter Include="UTILITY\meshoptimizer">
       <UniqueIdentifier>{5634b6ae-7f51-48ed-8a33-a5be8a31a56b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ENGINE\C_API">
+      <UniqueIdentifier>{7c7acd5a-05fd-483f-acb0-b2b6d44da227}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)LUA\lapi.h">
@@ -188,15 +191,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)wiHelper.h">
       <Filter>ENGINE\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)wiLuna.h">
-      <Filter>ENGINE\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)wiLua_Globals.h">
-      <Filter>ENGINE\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)wiLua.h">
-      <Filter>ENGINE\Scripting</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)wiResourceManager.h">
       <Filter>ENGINE\Helpers</Filter>
@@ -1407,6 +1401,33 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiAudio_BindLua.h">
       <Filter>ENGINE\Scripting\LuaBindings</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiApplication_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiBacklog_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiC_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiInput_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiMath_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiRenderer_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLuna.h">
+      <Filter>ENGINE\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLua.h">
+      <Filter>ENGINE\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLua_Globals.h">
+      <Filter>ENGINE\Scripting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LUA\lapi.c">
@@ -1543,9 +1564,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)wiHelper.cpp">
       <Filter>ENGINE\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)wiLua.cpp">
-      <Filter>ENGINE\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)wiResourceManager.cpp">
       <Filter>ENGINE\Helpers</Filter>
@@ -2209,6 +2227,24 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\LuaBindings\wiAudio_BindLua.cpp">
       <Filter>ENGINE\Scripting\LuaBindings</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiApplication_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiBacklog_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiInput_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiMath_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiRenderer_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\wiLua.cpp">
+      <Filter>ENGINE\Scripting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

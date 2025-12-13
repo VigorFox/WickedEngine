@@ -1,6 +1,6 @@
 #pragma once
-#include "wiLua.h"
-#include "wiLuna.h"
+#include "Scripting/wiLua.h"
+#include "Scripting/wiLuna.h"
 #include "wiJobSystem.h"
 
 namespace wi::lua

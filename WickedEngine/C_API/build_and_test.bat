@@ -39,16 +39,10 @@ if %errorlevel% neq 0 (
 
 echo Test Build Successful. Running Test...
 
-set "TEST_EXE=%~dp0..\x64\Debug\C_API_Test.exe"
+set "TEST_EXE=%~dp0..\BUILD\x64\Debug\C_API_Test\C_API_Test.exe"
 
 if not exist "%TEST_EXE%" (
-    echo Test executable not found at %TEST_EXE%
-    echo Checking alternative paths...
-    set "TEST_EXE=%~dp0..\C_API_Test\x64\Debug\C_API_Test.exe"
-)
-
-if not exist "%TEST_EXE%" (
-    echo Test executable still not found.
+    echo Test executable not found.
     exit /b 1
 )
 

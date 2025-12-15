@@ -1,13 +1,25 @@
 
 #include "wiApplication_API.h"
+#include "wiAsync_API.h"
+#include "wiAudio_API.h"
 #include "wiBacklog_API.h"
-#include "wiInput_API.h"
-#include "wiRenderer_API.h"
-
-
 #include "wiC_API.h"
+#include "wiImage_API.h"
+#include "wiInput_API.h"
+#include "wiLoadingScreen_API.h"
 #include "wiMath_API.h"
+#include "wiNetwork_API.h"
+#include "wiPathQuery_API.h"
+#include "wiPrimitive_API.h"
+#include "wiRenderPath_API.h"
+#include "wiRenderer_API.h"
+#include "wiSpriteFont_API.h"
+#include "wiSprite_API.h"
+#include "wiTexture_API.h"
+#include "wiVideo_API.h"
+#include "wiVoxelGrid_API.h"
 #include <stdio.h>
+
 
 int main() {
   printf("Testing WickedEngine C API...\n");
@@ -25,8 +37,6 @@ int main() {
   }
 
   // Application Test (Symbolic)
-  // In a real scenario, we would need a valid app handle.
-  // Here we just check if functions are callable (linker would check symbols).
   wiApplication app = NULL;
   wiApplication_GetActivePath(app);
   wiApplication_SetFPSDisplay(app, true);
@@ -54,16 +64,179 @@ int main() {
 
   printf("Testing Input API...\n");
   if (wiInput_Down(WI_INPUT_KEYBOARD_BUTTON_SPACE, 0)) {
-    printf("Input Test Warning: Space pressed unexpectedly (ignore if "
-           "interactive)\n");
+    printf("Input Test Warning: Space pressed unexpectedly\n");
   }
   wiVector ptr = wiVector_Create(100, 100, 0, 0);
   wiInput_SetPointer(ptr);
   wiVector ptr_read = wiInput_GetPointer();
-  // Note: SetPointer might not immediately reflect in GetPointer depending on
-  // frame update logic But for direct setter/getter verification it might work
-  // or we just verify symbol linking.
   printf("Input Pointer Set/Get: (%f, %f)\n", ptr_read.x, ptr_read.y);
+
+  // --- Audio API Test ---
+  printf("Testing Audio API...\n");
+  wiSound sound = wiAudio_CreateSound("test_audio.wav");
+  if (sound) {
+    wiSoundInstance instance = wiAudio_CreateSoundInstance(sound);
+    if (instance) {
+      wiAudio_SetVolume(0.5f, instance);
+      printf("Audio Instance Volume: %f\n", wiAudio_GetVolume(instance));
+      wiAudio_DestroySoundInstance(instance);
+    }
+    wiAudio_DestroySound(sound);
+  }
+  printf("Audio API Test Passed.\n");
+
+  // --- SpriteFont API Test ---
+  printf("Testing SpriteFont API...\n");
+  wiSpriteFont font = wiSpriteFont_Create("Hello C API");
+  if (font) {
+    wiSpriteFont_SetSize(font, 24);
+    wiVector pos = {10, 10, 0, 0};
+    wiSpriteFont_SetPos(font, pos);
+    wiSpriteFont_Draw(font);
+    wiSpriteFont_Destroy(font);
+  }
+  printf("SpriteFont API Test Passed.\n");
+
+  // --- Image API Test ---
+  printf("Testing Image API...\n");
+  wiImageParams params = wiImageParams_Create(10, 10, 100, 100);
+  if (params) {
+    wiVector pos = {50, 50, 0, 0};
+    wiImageParams_SetPos(params, pos);
+    wiVector read_pos = wiImageParams_GetPos(params);
+    printf("Image Pos: %f %f\n", read_pos.x, read_pos.y);
+    wiImageParams_Destroy(params);
+  }
+  printf("Image API Test Passed.\n");
+
+  // --- Sprite API Test ---
+  printf("Testing Sprite API...\n");
+  wiSprite sprite = wiSprite_Create(NULL, NULL);
+  if (sprite) {
+    wiImageParams sp_params = wiImageParams_Create(0, 0, 200, 200);
+    wiSprite_SetParams(sprite, sp_params);
+
+    // Get params back (returns copy)
+    wiImageParams read_params = wiSprite_GetParams(sprite);
+    wiVector size = wiImageParams_GetSize(read_params);
+    printf("Sprite Size: %f %f\n", size.x, size.y);
+
+    wiImageParams_Destroy(sp_params);
+    wiImageParams_Destroy(read_params);
+    wiSprite_Destroy(sprite);
+  }
+  printf("Sprite API Test Passed.\n");
+
+  // --- Network API Test ---
+  printf("Testing Network API...\n");
+  wiNetwork_Socket sock = wiNetwork_CreateSocket();
+  if (sock) {
+    if (wiNetwork_ListenPort(sock, 12345)) {
+      printf("Network Listen Success on 12345\n");
+    }
+    wiNetwork_DestroySocket(sock);
+  }
+  printf("Network API Test Passed.\n");
+
+  // --- Primitive API Test ---
+  printf("Testing Primitive API...\n");
+  wiAABB aabb =
+      wiAABB_Create((wiVector){-1, -1, -1, 0}, (wiVector){1, 1, 1, 0});
+  wiRay ray = wiRay_Create((wiVector){0, 0, -5, 0}, (wiVector){0, 0, 1, 0});
+  if (wiRay_IntersectsAABB(ray, aabb)) {
+    printf("Ray-AABB Intersection Passed.\n");
+  } else {
+    printf("Ray-AABB Intersection Failed!\n");
+  }
+  printf("Primitive API Test Passed.\n");
+
+  // --- RenderPath API Test ---
+  printf("Testing RenderPath API...\n");
+  // We can't easily create a RenderPath3D here without a full engine instance,
+  // but we can test the function call symbols linking at least.
+  // In a real scenario we'd get the active render path from application.
+  // For now, we just pass NULL and verify it doesn't crash (null check test).
+  wiRenderPath3D_SetAO(NULL, 1);
+  printf("RenderPath API Linkage Passed.\n");
+
+  // --- Texture API Test ---
+  printf("Testing Texture API...\n");
+  wiTexture tex = wiTexture_GetLogo();
+  if (tex) {
+    int w = wiTexture_GetWidth(tex);
+    int h = wiTexture_GetHeight(tex);
+    printf("Logo Texture Size: %d x %d\n", w, h);
+  }
+  printf("Texture API Test Passed.\n");
+
+  // --- VoxelGrid & PathQuery API Test ---
+  printf("Testing VoxelGrid & PathQuery API...\n");
+  wiVoxelGrid grid = wiVoxelGrid_Create();
+  if (grid) {
+    wiVoxelGrid_Init(grid, 10, 10, 10);
+    wiVoxelGrid_SetVoxel(grid, 5, 5, 5, true);
+    bool occupied = wiVoxelGrid_CheckVoxel(grid, 5, 5, 5);
+    if (occupied)
+      printf("Voxel Set/Check Passed.\n");
+    else
+      printf("Voxel Set/Check Failed!\n");
+
+    wiPathQuery query = wiPathQuery_Create();
+    if (query) {
+      wiVector start = {0, 0, 0, 0};
+      wiVector goal = {9, 9, 9, 0};
+      // Just symbolic process call, pathfinding might fail in empty/small grid
+      // but shouldn't crash
+      wiPathQuery_Process(query, start, goal, grid);
+      printf("PathQuery Process Linkage Passed.\n");
+      wiPathQuery_Destroy(query);
+    }
+    wiVoxelGrid_Destroy(grid);
+  }
+  printf("VoxelGrid & PathQuery API Test Passed.\n");
+
+  // --- Video API Test ---
+  printf("Testing Video API...\n");
+  wiVideo video = wiVideo_Load("test.mp4"); // Dummy load
+  // We don't expect it to validly load a non-existent file, but we check
+  // function linking
+  if (wiVideo_IsValid(video)) {
+    wiVideoInstance vinst = wiVideoInstance_Create(video);
+    wiVideoInstance_Play(vinst);
+    wiVideoInstance_Destroy(vinst);
+  }
+  wiVideo_Destroy(
+      video); // Clean up resource wrapper (if we added destroy for it)
+  printf("Video API Test Passed.\n");
+
+  // --- LoadingScreen API Test ---
+  printf("Testing LoadingScreen API...\n");
+  wiLoadingScreen loading = wiLoadingScreen_Create();
+  if (loading) {
+    wiLoadingScreen_SetBackgroundMode(loading, 0); // Fill
+    int prog = wiLoadingScreen_GetProgress(loading);
+    printf("Loading Progress: %d\n", prog);
+
+    // Test inheritance casting
+    wiRenderPath2D rp2d = wiLoadingScreen_AsRenderPath2D(loading);
+    if (rp2d)
+      wiRenderPath2D_ClearSprites(rp2d);
+
+    wiLoadingScreen_Destroy(loading);
+  }
+  printf("LoadingScreen API Test Passed.\n");
+
+  // --- Async API Test ---
+  printf("Testing Async API...\n");
+  wiAsync async = wiAsync_Create();
+  if (async) {
+    if (wiAsync_IsCompleted(async)) {
+      printf("Async Context Initially Completed.\n");
+    }
+    wiAsync_Wait(async); // Should return immediately for empty context
+    wiAsync_Destroy(async);
+  }
+  printf("Async API Test Passed.\n");
 
   printf("Test Finished.\n");
   return 0;

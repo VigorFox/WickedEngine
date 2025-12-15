@@ -472,6 +472,19 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiRenderer_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiInput_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiBacklog_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiAudio_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiSpriteFont_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiImage_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiSprite_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiNetwork_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPrimitive_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiRenderPath_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiTexture_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiVoxelGrid_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPathQuery_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiVideo_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiLoadingScreen_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Jolt\AABBTree\AABBTreeBuilder.cpp" />
@@ -830,6 +843,19 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiRenderer_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiInput_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiBacklog_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiAudio_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiSpriteFont_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiImage_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiSprite_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiNetwork_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPrimitive_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiRenderPath_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiTexture_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiVoxelGrid_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPathQuery_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiVideo_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiLoadingScreen_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)ArchiveVersionHistory.txt">

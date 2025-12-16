@@ -485,6 +485,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiVideo_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiLoadingScreen_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiScene_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPhysics_API.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Jolt\AABBTree\AABBTreeBuilder.cpp" />
@@ -856,6 +858,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiVideo_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiLoadingScreen_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiScene_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPhysics_API.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)ArchiveVersionHistory.txt">

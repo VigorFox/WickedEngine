@@ -10,18 +10,21 @@
 #include "wiMath_API.h"
 #include "wiNetwork_API.h"
 #include "wiPathQuery_API.h"
+#include "wiPhysics_API.h"
 #include "wiPrimitive_API.h"
 #include "wiRenderPath_API.h"
 #include "wiRenderer_API.h"
+#include "wiScene_API.h"
 #include "wiSpriteFont_API.h"
 #include "wiSprite_API.h"
 #include "wiTexture_API.h"
 #include "wiVideo_API.h"
 #include "wiVoxelGrid_API.h"
 #include <stdio.h>
-
+#include <string.h>
 
 int main() {
+  setvbuf(stdout, NULL, _IONBF, 0);
   printf("Testing WickedEngine C API...\n");
 
   // Math Test
@@ -225,6 +228,72 @@ int main() {
     wiLoadingScreen_Destroy(loading);
   }
   printf("LoadingScreen API Test Passed.\n");
+
+  // --- Scene API Test ---
+  printf("Testing Scene API...\n");
+  wiScene scene = wiScene_GetGlobal();
+  if (scene) {
+    wiEntity entity = wiScene_Entity_Create(scene);
+    if (entity != WI_INVALID_ENTITY) {
+      // Test Name Component
+      wiNameComponent nameComp = wiScene_Component_CreateName(scene, entity);
+      if (nameComp) {
+        wiNameComponent_Set(nameComp, "MyEntity");
+        const char *name = wiNameComponent_Get(nameComp);
+        printf("Entity Name: %s\n", name);
+        if (strcmp(name, "MyEntity") == 0) {
+          printf("Name Component Set/Get Passed.\n");
+        } else {
+          printf("Name Component Set/Get Failed!\n");
+        }
+      }
+
+      // Test Transform Component
+      wiTransformComponent transformComp =
+          wiScene_Component_CreateTransform(scene, entity);
+      if (transformComp) {
+        wiVector pos = {10, 20, 30, 0};
+        wiTransformComponent_SetPosition(transformComp, pos);
+        wiVector readPos = wiTransformComponent_GetPosition(transformComp);
+        printf("Transform Position: %f %f %f\n", readPos.x, readPos.y,
+               readPos.z);
+        if (readPos.x == 10 && readPos.y == 20 && readPos.z == 30) {
+          printf("Transform Component Set/Get Passed.\n");
+        } else {
+          printf("Transform Component Set/Get Failed!\n");
+        }
+      }
+
+      wiScene_Entity_Remove(scene, entity);
+    }
+  }
+  printf("Scene API Test Passed.\n");
+
+  // --- Physics API Test ---
+  printf("Testing Physics API...\n");
+  wiPhysics_Initialize();
+  wiPhysics_SetEnabled(true);
+  if (wiPhysics_IsEnabled()) {
+    printf("Physics Enabled.\n");
+  } else {
+    printf("Physics Enable Failed!\n");
+  }
+
+  // Test RigidBody Component
+  if (scene) {
+    wiEntity entity = wiScene_Entity_Create(scene);
+    wiRigidBodyPhysicsComponent rb =
+        wiScene_Component_CreateRigidBodyPhysics(scene, entity);
+    if (rb) {
+      // wiScene_Update(scene, 0.016f);
+      // wiPhysics_RigidBody_Activate(rb);
+      // wiVector force = {0, 10, 0, 0};
+      // wiPhysics_RigidBody_ApplyForce(rb, force);
+      printf("RigidBody Component Created.\n");
+    }
+    wiScene_Entity_Remove(scene, entity);
+  }
+  printf("Physics API Test Passed.\n");
 
   // --- Async API Test ---
   printf("Testing Async API...\n");

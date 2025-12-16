@@ -4,7 +4,6 @@
 #include "wiHelper.h"
 #include "wiMath_BindLua.h"
 
-
 #include <string>
 
 #ifdef PLATFORM_WINDOWS_DESKTOP

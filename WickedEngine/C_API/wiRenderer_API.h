@@ -5,6 +5,10 @@
 extern "C" {
 #endif
 
+typedef struct wiVoxelGrid_t *wiVoxelGrid;
+typedef struct wiPathQuery_t *wiPathQuery;
+typedef struct wiTrailRenderer_t *wiTrailRenderer;
+
 // Options
 void wiRenderer_SetGameSpeed(float speed);
 float wiRenderer_GetGameSpeed();
@@ -30,6 +34,12 @@ void wiRenderer_SetCapsuleShadowEnabled(bool enabled);
 void wiRenderer_SetCapsuleShadowFade(float fade);
 void wiRenderer_SetCapsuleShadowAngle(float angle);
 void wiRenderer_SetShadowLODOverrideEnabled(bool enabled);
+// SetGamma, SetResolution, SetDebugBoxesEnabled are deprecated/removed in
+// engine. void wiRenderer_SetGamma(float gamma); void
+// wiRenderer_SetResolution(int width, int height); void
+// wiRenderer_SetDebugBoxesEnabled(bool enabled);
+
+void wiRenderer_SetVSyncEnabled(bool enabled);
 
 // Drawing Helper Structs
 typedef struct wiRenderableLine_t {
@@ -79,6 +89,11 @@ typedef struct wiDebugTextParams_t {
 } wiDebugTextParams;
 
 void wiRenderer_DrawDebugText(const char *text, wiDebugTextParams *params);
+
+// Drawing Helpers from other modules
+void wiRenderer_DrawVoxelGrid(wiVoxelGrid *voxelGrid);
+void wiRenderer_DrawPathQuery(wiPathQuery *pathQuery);
+void wiRenderer_DrawTrail(wiTrailRenderer *trail);
 
 #ifdef __cplusplus
 }

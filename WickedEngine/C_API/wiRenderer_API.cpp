@@ -1,6 +1,10 @@
 #include "wiRenderer_API.h"
+#include "wiEventHandler.h"
 #include "wiHelper.h"
+#include "wiPathQuery.h"
 #include "wiRenderer.h"
+#include "wiTrailRenderer.h"
+#include "wiVoxelGrid.h"
 
 
 using namespace wi::renderer;
@@ -160,6 +164,28 @@ void wiRenderer_DrawDebugText(const char *text, wiDebugTextParams *params) {
   p.scaling = params->scaling;
   p.flags = params->flags;
   DrawDebugText(text, p);
+}
+
+void wiRenderer_SetVSyncEnabled(bool enabled) {
+  wi::eventhandler::SetVSync(enabled);
+}
+
+// SetGamma, SetResolution, SetDebugBoxesEnabled are deprecated/removed in
+// engine. They are removed from C API to reflect current logical parity.
+
+void wiRenderer_DrawVoxelGrid(wiVoxelGrid *voxelGrid) {
+  if (voxelGrid)
+    wi::renderer::DrawVoxelGrid((const wi::VoxelGrid *)voxelGrid);
+}
+
+void wiRenderer_DrawPathQuery(wiPathQuery *pathQuery) {
+  if (pathQuery)
+    wi::renderer::DrawPathQuery((const wi::PathQuery *)pathQuery);
+}
+
+void wiRenderer_DrawTrail(wiTrailRenderer *trail) {
+  if (trail)
+    wi::renderer::DrawTrail((const wi::TrailRenderer *)trail);
 }
 
 } // extern "C"

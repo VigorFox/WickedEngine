@@ -1,91 +1,85 @@
 #include "wiLoadingScreen_API.h"
-#include "../wiECS.h"
-#include "../wiHelper.h"
 #include "../wiLoadingScreen.h"
 #include "../wiScene.h"
 #include <mutex>
 
 using namespace wi;
-using namespace wi::ecs;
-using namespace wi::scene;
 
 extern "C" {
 
-wiLoadingScreen wiLoadingScreen_Create() {
+wiLoadingScreen wiLoadingScreen_Create(void) {
   return (wiLoadingScreen) new LoadingScreen();
 }
 
-void wiLoadingScreen_Destroy(wiLoadingScreen screen) {
-  if (screen)
-    delete (LoadingScreen *)screen;
-}
-
-wiRenderPath2D wiLoadingScreen_AsRenderPath2D(wiLoadingScreen screen) {
-  return (wiRenderPath2D)screen;
-}
-
-struct wiRenderPath_t *wiLoadingScreen_AsRenderPath(wiLoadingScreen screen) {
-  return (struct wiRenderPath_t *)screen;
-}
-
-void wiLoadingScreen_AddLoadModelTask(wiLoadingScreen screen,
-                                      const char *fileName,
-                                      wiMatrix transform) {
-  if (!screen || !fileName)
-    return;
-  LoadingScreen *loading = (LoadingScreen *)screen;
-
-  Entity root = CreateEntity();
-  XMMATRIX mat = XMLoadFloat4x4((XMFLOAT4X4 *)&transform);
-  std::string fname = fileName;
-
-  loading->addLoadingFunction([=](wi::jobsystem::JobArgs args) {
-    Scene scene;
-    wi::scene::LoadModel2(scene, fname, mat, root);
-    std::scoped_lock lck(wi::scene::GetScene().locker);
-    wi::scene::GetScene().Merge(scene);
-  });
-}
-
-// Function removed due to compilation issues with parameter resolution in C API
-// void wiLoadingScreen_AddRenderPathActivationTask(...)
-
-bool wiLoadingScreen_IsFinished(wiLoadingScreen screen) {
-  if (!screen)
-    return false;
-  return ((LoadingScreen *)screen)->isFinished();
-}
-
-int wiLoadingScreen_GetProgress(wiLoadingScreen screen) {
-  if (!screen)
-    return 0;
-  return ((LoadingScreen *)screen)->getProgress();
-}
-
-void wiLoadingScreen_SetBackgroundTexture(wiLoadingScreen screen,
-                                          wiTexture texture) {
-  if (screen && texture) {
-    wi::graphics::Texture tex = ((wi::Resource *)texture)->GetTexture();
-    ((LoadingScreen *)screen)->backgroundTexture.SetTexture(tex);
+void wiLoadingScreen_Destroy(wiLoadingScreen loadingScreen) {
+  if (loadingScreen) {
+    delete ((LoadingScreen *)loadingScreen);
   }
 }
 
-wiTexture wiLoadingScreen_GetBackgroundTexture(wiLoadingScreen screen) {
-  if (!screen)
-    return nullptr;
-  return (wiTexture) & ((LoadingScreen *)screen)->backgroundTexture;
+void wiLoadingScreen_Start(wiLoadingScreen loadingScreen) {
+  if (loadingScreen) {
+    ((LoadingScreen *)loadingScreen)->Start();
+  }
 }
 
-void wiLoadingScreen_SetBackgroundMode(wiLoadingScreen screen, int mode) {
-  if (screen)
-    ((LoadingScreen *)screen)->background_mode =
-        (LoadingScreen::BackgroundMode)mode;
+void wiLoadingScreen_AddLoadModelTask(wiLoadingScreen loadingScreen,
+                                      const char *fileName) {
+  if (loadingScreen && fileName) {
+    LoadingScreen *loading = (LoadingScreen *)loadingScreen;
+    std::string file = fileName;
+    // Helper to load into global scene
+    loading->addLoadingFunction([file](wi::jobsystem::JobArgs args) {
+      wi::scene::Scene scene;             // Local temporary scene
+      wi::scene::LoadModel2(scene, file); // Load into temp scene
+
+      // Merchant merge into global
+      // Note: locking global scene is good practice here
+      std::scoped_lock lck(wi::scene::GetScene().locker);
+      wi::scene::GetScene().Merge(scene);
+    });
+  }
 }
 
-int wiLoadingScreen_GetBackgroundMode(wiLoadingScreen screen) {
-  if (!screen)
-    return 0;
-  return (int)((LoadingScreen *)screen)->background_mode;
+void wiLoadingScreen_AddLoadModelTaskToScene(wiLoadingScreen loadingScreen,
+                                             wiScene scene,
+                                             const char *fileName) {
+  if (loadingScreen && scene && fileName) {
+    LoadingScreen *loading = (LoadingScreen *)loadingScreen;
+    wi::scene::Scene *targetScene = (wi::scene::Scene *)scene;
+    std::string file = fileName;
+
+    loading->addLoadingFunction(
+        [file, targetScene](wi::jobsystem::JobArgs args) {
+          wi::scene::Scene tempScene;
+          wi::scene::LoadModel2(tempScene, file);
+
+          std::scoped_lock lck(targetScene->locker);
+          targetScene->Merge(tempScene);
+        });
+  }
 }
 
-} // extern "C"
+bool wiLoadingScreen_IsFinished(wiLoadingScreen loadingScreen) {
+  if (loadingScreen) {
+    return ((LoadingScreen *)loadingScreen)->isFinished();
+  }
+  return true; // If null, considered finished/inactive
+}
+
+int wiLoadingScreen_GetProgress(wiLoadingScreen loadingScreen) {
+  if (loadingScreen) {
+    return ((LoadingScreen *)loadingScreen)->getProgress();
+  }
+  return 100;
+}
+
+void wiLoadingScreen_SetBackgroundTexture(wiLoadingScreen loadingScreen,
+                                          wiTexture texture) {
+  if (loadingScreen && texture) {
+    // texture is wi::Resource*
+    ((LoadingScreen *)loadingScreen)->backgroundTexture =
+        *((wi::Resource *)texture);
+  }
+}
+}

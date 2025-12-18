@@ -487,6 +487,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiScene_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPhysics_API.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiArchive_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiTrailRenderer_API.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiSpriteAnim_API.h" />
   </ItemGroup>
@@ -862,6 +863,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiScene_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPhysics_API.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiArchive_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiTrailRenderer_API.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiSpriteAnim_API.cpp" />
   </ItemGroup>

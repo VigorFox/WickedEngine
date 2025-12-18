@@ -1,9 +1,11 @@
 #include "wiImage_API.h"
 #include "wiHelper.h"
 #include "wiImage.h"
+#include "wiMath_API.h" // Explicit include
 
 
 using namespace wi::image;
+using namespace DirectX; // for XMFLOAT conversions if needed
 
 struct wiImageParams_t {
   Params params;
@@ -60,31 +62,41 @@ void wiImageParams_SetFade(wiImageParams params, float fade) {
 }
 
 wiVector wiImageParams_GetPos(wiImageParams params) {
-  if (!params)
-    return {0, 0, 0, 0};
-  return {params->params.pos.x, params->params.pos.y, params->params.pos.z, 0};
+  wiVector v = {0, 0, 0, 0};
+  if (params) {
+    v.x = params->params.pos.x;
+    v.y = params->params.pos.y;
+    v.z = params->params.pos.z;
+  }
+  return v;
 }
 
 wiVector wiImageParams_GetSize(wiImageParams params) {
-  if (!params)
-    return {0, 0, 0, 0};
-  return {params->params.siz.x, params->params.siz.y, 0, 0};
+  wiVector v = {0, 0, 0, 0};
+  if (params) {
+    v.x = params->params.siz.x;
+    v.y = params->params.siz.y;
+  }
+  return v;
 }
 
 wiVector wiImageParams_GetPivot(wiImageParams params) {
-  if (!params)
-    return {0, 0, 0, 0};
-  return {params->params.pivot.x, params->params.pivot.y, 0, 0};
+  wiVector v = {0, 0, 0, 0};
+  if (params) {
+    v.x = params->params.pivot.x;
+    v.y = params->params.pivot.y;
+  }
+  return v;
 }
 
 wiColor wiImageParams_GetColor(wiImageParams params) {
-  if (!params)
-    return {0, 0, 0, 0};
-  wiColor c;
-  c.r = (uint8_t)(params->params.color.x * 255);
-  c.g = (uint8_t)(params->params.color.y * 255);
-  c.b = (uint8_t)(params->params.color.z * 255);
-  c.a = (uint8_t)(params->params.color.w * 255);
+  wiColor c = {0, 0, 0, 0};
+  if (params) {
+    c.r = (uint8_t)(params->params.color.x * 255);
+    c.g = (uint8_t)(params->params.color.y * 255);
+    c.b = (uint8_t)(params->params.color.z * 255);
+    c.a = (uint8_t)(params->params.color.w * 255);
+  }
   return c;
 }
 

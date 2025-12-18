@@ -3,7 +3,6 @@
 #include "../wiResourceManager.h" // For texture resource checking if needed, though usually enclosed in Texture struct
 #include "../wiTextureHelper.h"
 
-
 using namespace wi::graphics;
 using namespace wi::texturehelper;
 
@@ -39,6 +38,12 @@ wiTexture wiTexture_CreateGradientTexture(
       wi::graphics::SwizzleFromString("rgba"), // Defaulting for simple C API
       perlin_scale, perlin_seed, perlin_octaves, perlin_persistence));
   return (wiTexture)res;
+}
+
+void wiTexture_Destroy(wiTexture texture) {
+  if (texture) {
+    delete (wi::Resource *)texture;
+  }
 }
 
 // NOTE: Since we allocate in CreateGradientTexture, we might need a Destroy

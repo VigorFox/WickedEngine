@@ -1,11 +1,25 @@
 #pragma once
-#include "wiC_API.h"
+#include <stdbool.h>
+#include <stdint.h>
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 // Vector API
+typedef struct wiVector_struct {
+  float x, y, z, w;
+} wiVector;
+
+typedef struct wiMatrix_struct {
+  float data[4][4];
+} wiMatrix;
+
+typedef struct wiColor_struct {
+  uint8_t r, g, b, a;
+} wiColor;
+
 wiVector wiVector_Create(float x, float y, float z, float w);
 float wiVector_GetX(wiVector v);
 float wiVector_GetY(wiVector v);

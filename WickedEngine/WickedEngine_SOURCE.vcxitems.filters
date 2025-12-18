@@ -1428,6 +1428,51 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Scripting\wiLua_Globals.h">
       <Filter>ENGINE\Scripting</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiAudio_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiImage_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiLoadingScreen_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiNetwork_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPathQuery_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPhysics_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiPrimitive_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiRenderPath_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiScene_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiSprite_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiSpriteFont_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiTexture_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiVideo_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)C_API\wiVoxelGrid_API.h">
+      <Filter>ENGINE\C_API</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)LUA\lapi.c">
@@ -2245,6 +2290,51 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Scripting\wiLua.cpp">
       <Filter>ENGINE\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiAsync_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiAudio_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiImage_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiLoadingScreen_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiNetwork_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPathQuery_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPhysics_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiPrimitive_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiRenderPath_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiScene_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiSprite_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiSpriteFont_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiTexture_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiVideo_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)C_API\wiVoxelGrid_API.cpp">
+      <Filter>ENGINE\C_API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

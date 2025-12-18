@@ -1,7 +1,9 @@
 #pragma once
-#include "wiC_API.h"
 #include "wiMath_API.h"
 #include "wiPrimitive_API.h"
+#include <stdbool.h>
+#include <stdint.h>
+
 
 #ifdef __cplusplus
 extern "C" {

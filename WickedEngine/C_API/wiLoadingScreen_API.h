@@ -1,8 +1,9 @@
 #pragma once
-#include "wiC_API.h"
 #include "wiMath_API.h"
 #include "wiRenderPath_API.h"
 #include "wiTexture_API.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 
 #ifdef __cplusplus
@@ -23,11 +24,10 @@ void wiLoadingScreen_AddLoadModelTask(wiLoadingScreen screen,
 // Note: Lua bind has AddRenderPathActivationTask, but handling RenderPath
 // pointers in C needs care. We accept opaque wiRenderPath. fadeType:
 // 0=FadeToColor, 1=FadeToBlack
-void wiLoadingScreen_AddRenderPathActivationTask(wiLoadingScreen screen,
-                                                 wiRenderPath path,
-                                                 float fadeSeconds, uint8_t r,
-                                                 uint8_t g, uint8_t b,
-                                                 int fadeType);
+// void wiLoadingScreen_AddRenderPathActivationTask(wiLoadingScreen screen,
+//                                                  wiRenderPath path,
+//                                                  float fadeSeconds, int r,
+//                                                  int g, int b, int fadeType);
 
 bool wiLoadingScreen_IsFinished(wiLoadingScreen screen);
 int wiLoadingScreen_GetProgress(wiLoadingScreen screen);

@@ -1,5 +1,7 @@
 #pragma once
-#include "wiC_API.h"
+#include "wiMath_API.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,8 +29,16 @@ wiColor wiImageParams_GetColor(wiImageParams params);
 float wiImageParams_GetOpacity(wiImageParams params);
 float wiImageParams_GetRotation(wiImageParams params);
 
-// Enums for Stencil, Blend, etc. can be added as needed.
-// For now covering basics.
+// Blend Modes
+typedef enum wiBlendMode {
+  WI_BLENDMODE_NORMAL,
+  WI_BLENDMODE_ADDITIVE,
+  WI_BLENDMODE_MULTIPLY,
+  WI_BLENDMODE_PREMULTIPLIED
+} wiBlendMode;
+
+void wiImageParams_SetBlendMode(wiImageParams params, wiBlendMode mode);
+wiBlendMode wiImageParams_GetBlendMode(wiImageParams params);
 
 #ifdef __cplusplus
 }

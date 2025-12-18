@@ -9,8 +9,8 @@ extern "C" {
 
 void wiBacklog_Post(const char *text);
 void wiBacklog_Clear();
-void wiBacklog_SetBackground(
-    wiTexture *texture); // Texture type needed? or just pass generic?
+typedef struct wiTexture_t *wiTexture;
+void wiBacklog_SetBackground(wiTexture texture);
 // Wait, wiTexture is not exposed yet. Let's skip SetBackground for now or use
 // opaque pointer.
 void wiBacklog_SetFontSize(int value);

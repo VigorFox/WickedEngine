@@ -1,15 +1,28 @@
 #pragma once
-#include "wiC_API.h"
+#include "wiMath_API.h"       // for wiColor
+#include "wiRenderPath_API.h" // for wiRenderPath
+#include <stdbool.h>
+#include <stdint.h>
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 // Application Handle
-// Note: wiApplication is defined in wiC_API.h
+// Application Handle
+typedef struct wiApplication_t *wiApplication;
+typedef struct wiCanvas_t *wiCanvas;
+
+typedef enum wiFadeType_t {
+  WI_FADE_TO_COLOR = 0,
+  WI_FADE_TO_BLACK = 1
+} wiFadeType;
 
 void wiApplication_SetActivePath(wiApplication app, wiRenderPath path);
-void wiApplication_SetActivePathFade(wiApplication app, wiRenderPath path, float fadeSeconds, wiColor fadeColor, wiFadeType fadeType);
+void wiApplication_SetActivePathFade(wiApplication app, wiRenderPath path,
+                                     float fadeSeconds, wiColor fadeColor,
+                                     wiFadeType fadeType);
 wiRenderPath wiApplication_GetActivePath(wiApplication app);
 
 void wiApplication_SetFrameSkip(wiApplication app, bool enabled);
@@ -23,7 +36,8 @@ void wiApplication_SetResolutionDisplay(wiApplication app, bool active);
 void wiApplication_SetLogicalSizeDisplay(wiApplication app, bool active);
 void wiApplication_SetColorSpaceDisplay(wiApplication app, bool active);
 void wiApplication_SetPipelineCountDisplay(wiApplication app, bool active);
-void wiApplication_SetHeapAllocationCountDisplay(wiApplication app, bool active);
+void wiApplication_SetHeapAllocationCountDisplay(wiApplication app,
+                                                 bool active);
 void wiApplication_SetVRAMUsageDisplay(wiApplication app, bool active);
 void wiApplication_SetColorGradingHelper(wiApplication app, bool active);
 

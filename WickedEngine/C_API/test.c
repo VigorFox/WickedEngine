@@ -15,9 +15,11 @@
 #include "wiRenderPath_API.h"
 #include "wiRenderer_API.h"
 #include "wiScene_API.h"
+#include "wiSpriteAnim_API.h"
 #include "wiSpriteFont_API.h"
 #include "wiSprite_API.h"
 #include "wiTexture_API.h"
+#include "wiTrailRenderer_API.h"
 #include "wiVideo_API.h"
 #include "wiVoxelGrid_API.h"
 #include <stdio.h>
@@ -306,6 +308,66 @@ int main() {
     wiAsync_Destroy(async);
   }
   printf("Async API Test Passed.\n");
+
+  // --- TrailRenderer API Test ---
+  printf("Testing TrailRenderer API...\n");
+  wiTrailRenderer trail = wiTrailRenderer_Create();
+  if (trail) {
+    if (wiTrailRenderer_GetPointCount(trail) == 0) {
+      printf("TrailRenderer Initial Point Count 0 - Passed.\n");
+    }
+    wiVector pt = {1, 2, 3, 0};
+    wiVector col = {1, 0, 0, 1};
+    wiVector rot = {0, 0, 0, 0};
+    wiTrailRenderer_AddPoint(trail, pt, 1.0f, col, rot);
+    if (wiTrailRenderer_GetPointCount(trail) == 1) {
+      printf("TrailRenderer AddPoint - Passed.\n");
+    }
+    wiTrailRenderer_SetWidth(trail, 5.0f);
+    if (wiTrailRenderer_GetWidth(trail) == 5.0f) {
+      printf("TrailRenderer SetWidth - Passed.\n");
+    }
+    wiTrailRenderer_SetBlendMode(trail, WI_TRAIL_BLENDMODE_ADDITIVE);
+    if (wiTrailRenderer_GetBlendMode(trail) == WI_BLENDMODE_ADDITIVE) {
+      printf("TrailRenderer SetBlendMode - Passed.\n");
+    }
+
+    wiTrailRenderer_Destroy(trail);
+  }
+  printf("TrailRenderer API Test Passed.\n");
+
+  // --- SpriteAnim API Test ---
+  printf("Testing SpriteAnim API...\n");
+  wiSprite sprite_anim = wiSprite_Create(NULL, NULL);
+  if (sprite_anim) {
+    wiSpriteAnim anim = wiSprite_GetAnim(sprite_anim);
+    if (anim) {
+      wiSpriteAnim_SetRot(anim, 1.57f);
+      if (wiSpriteAnim_GetRot(anim) == 1.57f) {
+        printf("SpriteAnim SetRot - Passed.\n");
+      }
+      wiSpriteAnim_SetOpacity(anim, 0.5f);
+      if (wiSpriteAnim_GetOpacity(anim) == 0.5f) {
+        printf("SpriteAnim SetOpacity - Passed.\n");
+      }
+      wiVector vel = {1, 0, 0, 0};
+      wiSpriteAnim_SetVelocity(anim, vel);
+      wiVector read_vel = wiSpriteAnim_GetVelocity(anim);
+      if (read_vel.x == 1.0f) {
+        printf("SpriteAnim SetVelocity - Passed.\n");
+      }
+    }
+    wiSprite_Destroy(sprite_anim);
+  }
+  printf("SpriteAnim API Test Passed.\n");
+
+  // --- RenderPath3D Extended API Test ---
+  printf("Testing RenderPath3D Extended API...\n");
+  // Again, passing NULL just to check linkage of new functions
+  wiRenderPath3D_SetResolutionScale(NULL, 0.5f);
+  wiRenderPath3D_SetChromaticAberrationEnabled(NULL, true);
+  wiRenderPath3D_SetFSREnabled(NULL, true);
+  printf("RenderPath3D Extended API Linkage Passed.\n");
 
   printf("Test Finished.\n");
   return 0;

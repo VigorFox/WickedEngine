@@ -14,6 +14,8 @@ wiSprite wiSprite_Create(const char *image_file,
                          const char *mask_file); // args can be null
 void wiSprite_Destroy(wiSprite sprite);
 
+wiSpriteAnim wiSprite_GetAnim(wiSprite sprite);
+
 void wiSprite_SetParams(wiSprite sprite, wiImageParams params);
 wiImageParams
 wiSprite_GetParams(wiSprite sprite); // Returns copy or pointer? internal one.

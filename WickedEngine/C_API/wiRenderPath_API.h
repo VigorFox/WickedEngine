@@ -1,9 +1,13 @@
 #pragma once
-#include "wiC_API.h"
-#include "wiImage_API.h"
-#include "wiSpriteFont_API.h"
-#include "wiSprite_API.h"
+#include <stdbool.h>
+#include <stdint.h>
 
+
+typedef struct wiSprite_t *wiSprite;
+typedef struct wiSpriteFont_t *wiSpriteFont;
+typedef struct wiTexture_t *wiTexture;
+#include <stdbool.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -91,6 +95,30 @@ void wiRenderPath3D_SetFSR2Enabled(wiRenderPath3D renderPath, bool value);
 void wiRenderPath3D_SetFSR2Preset(
     wiRenderPath3D renderPath,
     int value); // 0: Quality, 1: Balanced, 2: Performance, 3: UltraPerf
+
+// New additions
+void wiRenderPath3D_SetDistortionOverlay(wiRenderPath3D renderPath,
+                                         wiTexture texture);
+void wiRenderPath3D_SetChromaticAberrationEnabled(wiRenderPath3D renderPath,
+                                                  bool value);
+void wiRenderPath3D_SetChromaticAberrationAmount(wiRenderPath3D renderPath,
+                                                 float value);
+void wiRenderPath3D_SetHDRCalibration(wiRenderPath3D renderPath, float value);
+void wiRenderPath3D_SetVisibilityComputeShadingEnabled(
+    wiRenderPath3D renderPath, bool value);
+void wiRenderPath3D_SetTonemap(wiRenderPath3D renderPath, int value);
+
+void wiRenderPath3D_SetCropLeft(wiRenderPath3D renderPath, float value);
+void wiRenderPath3D_SetCropRight(wiRenderPath3D renderPath, float value);
+void wiRenderPath3D_SetCropTop(wiRenderPath3D renderPath, float value);
+void wiRenderPath3D_SetCropBottom(wiRenderPath3D renderPath, float value);
+
+void wiRenderPath3D_SetFSREnabled(wiRenderPath3D renderPath, bool value);
+void wiRenderPath3D_SetFSRSharpness(wiRenderPath3D renderPath, float value);
+void wiRenderPath3D_SetFSR2Sharpness(wiRenderPath3D renderPath, float value);
+
+// GetLastPostProcessRT?
+wiTexture wiRenderPath3D_GetLastPostProcessRT(wiRenderPath3D renderPath);
 
 #ifdef __cplusplus
 }

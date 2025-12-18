@@ -1,6 +1,8 @@
 #pragma once
-#include "wiC_API.h"
 #include "wiMath_API.h"
+#include <stdbool.h>
+#include <stdint.h>
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,6 +20,9 @@ wiTexture wiTexture_CreateGradientTexture(
     int gradient_flags, // 1<<0: Inverse, 1<<1: Smoothstep, 1<<2: PerlinNoise
     float perlin_scale, uint32_t perlin_seed, int perlin_octaves,
     float perlin_persistence);
+
+void wiTexture_Destroy(
+    wiTexture texture); // Frees the resource if it was allocated by Create
 
 bool wiTexture_IsValid(wiTexture texture);
 int wiTexture_GetWidth(wiTexture texture);
